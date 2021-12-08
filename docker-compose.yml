@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/data/db
+    environment:
+      MYSQL_ROOT_PASSWORD: "d3s4rr0ll0"
+    networks:
+      - development
+networks:
+  development:
+    name: training_dev_network
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.40.0.0/16
+volumes:
+  symfony_cache: {}
+  mysql_data: {}
+  mongodb_data: {}

@@ -1,0 +1,25 @@
+{
+    "name": "javiercaride/rigor-talks",
+    "description": "Training project",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "jcaride",
+            "email": "javier.caride@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {"RigorTalks\\": "src/"}
+    },
+    "require": {
+        "php": ">=7.4",
+        "doctrine/dbal": "^3.2",
+        "symfony/console": "^5.4"
+    },
+    "require-dev": {
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1.0.0",
+        "codeception/module-asserts": "^1.0.0"
+    }
+}
