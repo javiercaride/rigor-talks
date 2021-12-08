@@ -1,3 +1,4 @@
 .idea
+.env
 vendor
 tests/_support/_generated

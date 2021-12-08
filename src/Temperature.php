@@ -31,15 +31,16 @@ class Temperature
     public function isSuperHot(): bool
     {
         $connectionParams = array(
-            'dbname' => 'mydb',
-            'user' => 'user',
-            'password' => 'secret',
-            'host' => 'localhost',
-            'driver' => 'pdo_mysql',
+            'dbname' => $_ENV['DB_NAME'],
+            'user' => $_ENV['DB_USER'],
+            'password' => $_ENV['DB_PASSWORD'],
+            'host' => $_ENV['DB_HOST'],
+            'driver' => $_ENV['DB_DRIVER'],
         );
 
         $connection = DriverManager::getConnection($connectionParams);
 
+        return false;
     }
 
     /**

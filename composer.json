@@ -15,7 +15,8 @@
     "require": {
         "php": ">=7.4",
         "doctrine/dbal": "^3.2",
-        "symfony/console": "^5.4"
+        "symfony/console": "^5.4",
+        "vlucas/phpdotenv": "^5.4"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",

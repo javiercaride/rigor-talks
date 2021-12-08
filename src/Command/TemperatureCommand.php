@@ -19,8 +19,13 @@ class TemperatureCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $temperature = Temperature::take(rand(-5, 100));
+            $temperature = Temperature::take(rand(-10, 100));
             $output->writeln("The measured temperature is {$temperature->measure()}");
+
+            if ($temperature->isSuperHot()) {
+                $output->writeln("Be careful! The temperature is so high!");
+            }
+
         } catch (TemperatureNegativeException $ex) {
             $output->writeln("The temperature is negative");
         }
