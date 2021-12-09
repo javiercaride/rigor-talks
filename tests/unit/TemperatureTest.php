@@ -1,9 +1,12 @@
 <?php
 
+use Codeception\Test\Unit;
+use RigorTalks\ColdThresholdSource;
 use RigorTalks\Exception\TemperatureNegativeException;
 use RigorTalks\Temperature;
+use RigorTalks\Test\TemperatureTestClass;
 
-class TemperatureTest extends \Codeception\Test\Unit
+class TemperatureTest extends Unit implements ColdThresholdSource
 {
     /**
      * @var \UnitTester
@@ -26,13 +29,32 @@ class TemperatureTest extends \Codeception\Test\Unit
         $temperature = Temperature::take($measure);
     }
 
-    protected function _before()
+    public function testSuperHotTemperature()
     {
+        $temperature = TemperatureTestClass::take(95);
+        $this->assertTrue($temperature->isSuperHot());
     }
 
-    protected function _after()
+    public function testNotSuperHotTemperature()
     {
+        $temperature = TemperatureTestClass::take(10);
+        $this->assertFalse($temperature->isSuperHot());
     }
 
+    public function testIsSuperColdTemperature()
+    {
+        $temperature = TemperatureTestClass::take(10);
+        $this->assertTrue($temperature->isSuperCold($this));
+    }
 
+    public function testIsNotSuperColdTemperature()
+    {
+        $temperature = TemperatureTestClass::take(60);
+        $this->assertFalse($temperature->isSuperCold($this));
+    }
+
+    public function getThresholdValue(): int
+    {
+        return 10;
+    }
 }

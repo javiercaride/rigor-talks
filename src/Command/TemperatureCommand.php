@@ -1,6 +1,7 @@
 <?php
 namespace RigorTalks\Command;
 
+use RigorTalks\DbColdThreshold;
 use RigorTalks\Exception\TemperatureNegativeException;
 use RigorTalks\Temperature;
 use Symfony\Component\Console\Command\Command;
@@ -23,7 +24,11 @@ class TemperatureCommand extends Command
             $output->writeln("The measured temperature is {$temperature->measure()}");
 
             if ($temperature->isSuperHot()) {
-                $output->writeln("Be careful! The temperature is so high!");
+                $output->writeln("Be careful! The temperature is too high!");
+            }
+
+            if ($temperature->isSuperCold(new DbColdThreshold())) {
+                $output->writeln("Be careful! The temperature is too low!");
             }
 
         } catch (TemperatureNegativeException $ex) {

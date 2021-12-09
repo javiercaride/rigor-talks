@@ -10,13 +10,17 @@
         }
     ],
     "autoload": {
-        "psr-4": {"RigorTalks\\": "src/"}
+        "psr-4": {
+            "RigorTalks\\": "src/",
+            "RigorTalks\\Test\\": "tests/src"
+        }
     },
     "require": {
         "php": ">=7.4",
         "doctrine/dbal": "^3.2",
         "symfony/console": "^5.4",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "codeception/codeception": "^4.1",
