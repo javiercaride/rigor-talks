@@ -6,7 +6,7 @@ use RigorTalks\Exception\TemperatureNegativeException;
 use RigorTalks\Temperature;
 use RigorTalks\Test\TemperatureTestClass;
 
-class TemperatureTest extends Unit implements ColdThresholdSource
+class TemperatureTest extends Unit
 {
     /**
      * @var \UnitTester
@@ -44,17 +44,25 @@ class TemperatureTest extends Unit implements ColdThresholdSource
     public function testIsSuperColdTemperature()
     {
         $temperature = TemperatureTestClass::take(10);
-        $this->assertTrue($temperature->isSuperCold($this));
+        $this->assertTrue($temperature->isSuperCold($this->getColdThresholdSource()));
     }
 
     public function testIsNotSuperColdTemperature()
     {
         $temperature = TemperatureTestClass::take(60);
-        $this->assertFalse($temperature->isSuperCold($this));
+        $this->assertFalse($temperature->isSuperCold($this->getColdThresholdSource()));
     }
 
-    public function getThresholdValue(): int
+    /**
+     * @return ColdThresholdSource
+     */
+    private function getColdThresholdSource(): ColdThresholdSource
     {
-        return 10;
+        return new class implements ColdThresholdSource {
+            public function getThresholdValue(): int
+            {
+                return 10;
+            }
+        };
     }
 }
