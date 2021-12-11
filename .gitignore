@@ -2,3 +2,7 @@
 .env
 vendor
 tests/_support/_generated
+infection.log
+infection-log.json
+summary.log
+tests/_output

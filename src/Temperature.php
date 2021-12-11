@@ -20,7 +20,12 @@ class Temperature
 
     public static function take($measure): static
     {
-        return new static(($measure));
+        return new static($measure);
+    }
+
+    public static function fromSensor(Sensor $sensor): static
+    {
+        return new static($sensor->thermometer()->measure()->value());
     }
 
     public function measure(): int
