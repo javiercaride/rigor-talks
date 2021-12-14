@@ -44,6 +44,11 @@ class Temperature
         return $this->measure() <= $thresholdSource->getThresholdValue();
     }
 
+    public function add(self $otherTemperature): self
+    {
+        return new static($this->measure() + $otherTemperature->measure());
+    }
+
     /**
      * @param int $measure
      * @throws TemperatureNegativeException

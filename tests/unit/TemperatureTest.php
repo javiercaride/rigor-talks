@@ -70,6 +70,23 @@ class TemperatureTest extends Unit
         $this->assertEquals(50, $temperature->measure());
     }
 
+    public function testTryToSumTwoTemperatures()
+    {
+        $firstTemperature = Temperature::take(20);
+        $secondTemperature = Temperature::take(80);
+
+        $resultTemperature = $firstTemperature->add($secondTemperature);
+        $this->assertEquals(100, $resultTemperature->measure());
+
+        // Test that the original values were not modified
+        $this->assertEquals(20, $firstTemperature->measure());
+        $this->assertEquals(80, $secondTemperature->measure());
+
+        // Test that the returned instance is neither firstTemperature nor secondTemperature
+        $this->assertNotSame($resultTemperature, $firstTemperature);
+        $this->assertNotSame($resultTemperature, $secondTemperature);
+    }
+
     /**
      * @return ColdThresholdSource
      */
